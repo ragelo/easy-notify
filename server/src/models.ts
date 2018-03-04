@@ -20,14 +20,14 @@ export const postgresDB = new Sequelize(config.postgres.uri, {
 });
 
 export const AuthClient = postgresDB.define('auth_client', {
-  name: {type: Sequelize.STRING, allowNull: false},
-  secretHash: {type: Sequelize.STRING, allowNull: false},
+  name: {allowNull: false, type: Sequelize.STRING},
+  secretHash: {allowNull: false, type: Sequelize.STRING},
 }, {
   tableName: 'auth_client',
 });
 
 export const Subject = postgresDB.define('subject', {
-  hashed_password: {type: Sequelize.STRING, allowNull: false},
+  hashed_password: {allowNull: false, type: Sequelize.STRING},
 }, {
   tableName: 'subject',
 });
