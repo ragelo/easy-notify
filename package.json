@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "yarn run migrate && node server/lib",
+    "start": "node server/lib",
     "watch": "concurrently -c \"black.bgBlue,black.bgMagenta\" -n \"client,server\" \"ng build --watch\" \"gulp watch\"",
     "build": "yarn run build-server && yarn run build-client",
     "build-server": "gulp build-server",
@@ -15,8 +15,8 @@
     "lint-server": "tslint --config server/tslint.json --project server",
     "lint-client": "tslint --config client/tslint.json --project client",
     "e2e": "ng e2e",
-    "migrate": "exec $(npm prefix)/.npm-scripts/db_migrate",
-    "seed": "exec $(npm prefix)/.npm-scripts/db_seed",
+    "migrate": "exec $(npm prefix)/scripts/db_migrate",
+    "seed": "exec $(npm prefix)/scripts/db_seed",
     "snyk-protect": "snyk protect",
     "prepublish": "npm run snyk-protect",
     "heroku-postinstall": "npm run build"

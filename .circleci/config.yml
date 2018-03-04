@@ -108,8 +108,14 @@ jobs:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
+          name: Heroku auth
+          command: ./scripts/heroku_key_setup
+      - add_ssh_keys:
+          fingerprints:
+            - "e2:1c:63:90:01:61:54:ae:13:49:48:2b:b9:fd:b8:6c"
+      - run:
           name: Deploy application
-          command: echo "No deploy configured yes"
+          command: ./scripts/heroku_deploy easy-notify
 
 workflows:
   version: 2
