@@ -4,14 +4,20 @@
   "license": "MIT",
   "scripts": {
     "start": "yarn run migrate && node server/lib",
+    "watch": "concurrently -c \"black.bgBlue,black.bgMagenta\" -n \"client,server\" \"ng build --watch\" \"gulp watch-server\"",
+    "build": "yarn run build-server && yarn run build-client",
+    "build-server": "gulp build-server",
+    "build-client": "ng build",
+    "test": "yarn run test-server && yarn run test-client",
+    "test-server": "jest",
+    "test-client": "ng test --watch=false",
+    "lint": "yarn run lint-server && yarn run lint-client",
+    "lint-server": "tslint --config server/tslint.json --project server",
+    "lint-client": "tslint --config client/tslint.json --project client",
+    "e2e": "ng e2e",
     "migrate": "exec $(npm prefix)/.npm-scripts/db_migrate",
     "seed": "exec $(npm prefix)/.npm-scripts/db_seed",
-    "build": "gulp build-server && ng build",
-    "watch": "concurrently -c \"black.bgBlue,black.bgMagenta\" -n \"client,server\" \"ng build --watch\" \"gulp watch-server\"",
-    "test": "jest && ng test --watch=false",
-    "lint": "tslint --config client/tslint.json --project client && tslint --config server/tslint.json --project server",
-    "e2e": "ng e2e",
-    "postinstall": "npm run build"
+    "heroku-postinstall": "npm run build"
   },
   "private": true,
   "dependencies": {
