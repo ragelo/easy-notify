@@ -1,27 +1,36 @@
-const url = require("url");
-const querystring = require("querystring");
+const url = require('url');
+const querystring = require('querystring');
 
 // https://github.com/pwnall/node-parse-database-url/blob/master/lib/parse-database-url.js
 function parseDatabaseUrl(databaseUrl) {
-  if (!databaseUrl) return {};
+  if (!databaseUrl) {
+    return {};
+  }
+
   const parsedUrl = url.parse(databaseUrl, false, true);
   const config = querystring.parse(parsedUrl.query);
 
-  config.driver = (parsedUrl.protocol).replace(/:$/, "");
+  config.driver = (parsedUrl.protocol).replace(/:$/, '');
 
   if (parsedUrl.auth) {
-    const userPassword = parsedUrl.auth.split(":", 2);
+    const userPassword = parsedUrl.auth.split(':', 2);
     config.user = userPassword[0];
     if (userPassword.length > 1) {
       config.password = userPassword[1];
     }
   }
+
   if (parsedUrl.pathname) {
-    config.database = parsedUrl.pathname.replace(/^\//, "").replace(/\/$/, "");
+    config.database = parsedUrl.pathname.replace(/^\//, '').replace(/\/$/, '');
   }
 
-  if (parsedUrl.hostname) config.host = parsedUrl.hostname;
-  if (parsedUrl.port) config.port = parsedUrl.port;
+  if (parsedUrl.hostname) {
+    config.host = parsedUrl.hostname;
+  }
+
+  if (parsedUrl.port) {
+    config.port = parsedUrl.port;
+  }
 
   return config;
 }

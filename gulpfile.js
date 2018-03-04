@@ -18,7 +18,9 @@ gulp.task('build-server', () => {
 });
 
 gulp.task('watch-server', ['start-server'], () => {
-  gulp.watch(['./server/src/**.ts'], ['build-server', server.restart])
+  gulp.watch(['./server/src/**.ts'], () => {
+    gulp.run('build-server', [server.restart]);
+  });
 });
 
 

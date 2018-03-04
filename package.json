@@ -77,6 +77,11 @@
     "yarn": "1.3.2"
   },
   "jest": {
+    "coverageDirectory": "<rootDir>/coverage/server",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "<rootDir>/server/src/**.(ts|tsx|js)"
+    ],
     "moduleFileExtensions": [
       "ts",
       "js"

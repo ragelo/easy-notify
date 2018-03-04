@@ -5,7 +5,7 @@ function normalizePort(val: number | string): number | string {
   } else if (port >= 0) {
     return port;
   }
-  console.warn(`Invalid server port: ${val}`);
+  Console.warn(`Invalid server port: ${val}`);
 }
 
 const env = process.env.NODE_ENV || 'development';

@@ -6,8 +6,10 @@ exports.executeSql = function executeSql(db, sqlPath) {
     fs.readFile(path.join(__dirname + '/../' + sqlPath), {
       encoding: 'utf-8'
     }, function(err,data){
-      if (err) return reject(err);
-      console.log(data);
+      if (err) {
+        return reject(err);
+      }
+      Console.log(data);
       resolve(data);
     });
   }).then(function(data) {
