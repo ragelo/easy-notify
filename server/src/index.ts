@@ -7,20 +7,20 @@ import {config} from './config';
 import {postgresDB} from './models';
 
 export async function main(): Promise<any> {
-  Console.log('Starting server...');
+  console.log('Starting server...');
   const application: HttpServer = http.createServer(app);
 
   try {
     await postgresDB.authenticate();
     await postgresDB.sync();
   } catch (error) {
-    Console.error(error);
+    console.error(error);
     throw new Error('An error occurred connecting to the database!');
   }
-  Console.info('Connected to the postgres');
+  console.info('Connected to the postgres');
 
   application.listen(config.port, (): void => {
-    Console.info(`Server listening on localhost:${config.port}`);
+    console.info(`Server listening on localhost:${config.port}`);
   });
 
   application.on('error', (error: NodeJS.ErrnoException): void => {
@@ -29,14 +29,14 @@ export async function main(): Promise<any> {
     }
     const port: number | string = app.get('port');
     const bind: string = (typeof port === 'string') ? `Pipe ${port}` : `Port ${port}`;
-    Console.error(error.code);
+    console.error(error.code);
     switch (error.code) {
       case 'EACCES':
-        Console.error(`${bind} requires elevated privileges`, error);
+        console.error(`${bind} requires elevated privileges`, error);
         process.exit(1);
         break;
       case 'EADDRINUSE':
-        Console.error(`${bind} is already in use`, error);
+        console.error(`${bind} is already in use`, error);
         process.exit(1);
         break;
       default:
@@ -54,7 +54,7 @@ export async function main(): Promise<any> {
         process.exit(hasErrors ? 1 : 0);
       });
     }).catch((error) => {
-      Console.error('Error while closing server.', error);
+      console.error('Error while closing server.', error);
       server.close(() => {
         process.exit(1);
       });

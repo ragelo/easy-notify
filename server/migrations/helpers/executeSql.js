@@ -1,5 +1,5 @@
-var fs = require('fs');
-var path = require('path');
+const fs = require('fs');
+const path = require('path');
 
 exports.executeSql = function executeSql(db, sqlPath) {
   return new Promise( function( resolve, reject ) {
@@ -9,7 +9,7 @@ exports.executeSql = function executeSql(db, sqlPath) {
       if (err) {
         return reject(err);
       }
-      Console.log(data);
+      console.log(data);
       resolve(data);
     });
   }).then(function(data) {
