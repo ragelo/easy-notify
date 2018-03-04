@@ -21,7 +21,7 @@ export const config = {
     url: process.env.REDIS_URL || 'redis://root@localhost:6379',
   },
   rollbar: {
-    token: process.env.ROLLBAR_ACCESS_TOKEN || 'd04efcde14b84445bfeaac69b9fcf370',
     endpoint: process.env.ROLLBAR_ENDPOINT || 'https://api.rollbar.com/api/1/item/',
-  }
+    token: process.env.ROLLBAR_ACCESS_TOKEN || 'd04efcde14b84445bfeaac69b9fcf370',
+  },
 };

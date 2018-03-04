@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "node server/lib",
+    "start": "yarn run migrate && node server/lib",
+    "migrate": "server/scripts/db_migrate",
     "build": "gulp build-server && ng build",
     "watch": "concurrently -c \"black.bgBlue,black.bgMagenta\" -n \"client,server\" \"ng build --watch\" \"gulp watch-server\"",
     "test": "jest && ng test --watch=false",

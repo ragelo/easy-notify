@@ -6,7 +6,6 @@ import app from './app';
 import {config} from './config';
 import {postgresDB} from './models';
 
-
 export async function main(): Promise<any> {
   console.log('Starting server...');
   const application: HttpServer = http.createServer(app);

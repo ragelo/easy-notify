@@ -23,6 +23,4 @@ app.use(compression(), express.static(path.join(__dirname, '../../client/dist'))
 
 app.use(cors);
 
-
-
 export default app;
