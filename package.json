@@ -11,7 +11,9 @@
     "test": "jest && ng test --watch=false",
     "lint": "tslint --config client/tslint.json --project client && tslint --config server/tslint.json --project server",
     "e2e": "ng e2e",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "private": true,
   "dependencies": {
@@ -37,7 +39,7 @@
     "compression": "^1.7.2",
     "cookie-parser": "^1.4.3",
     "core-js": "^2.4.1",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-develop-server": "^0.5.2",
     "gulp-typescript": "^4.0.1",
     "express": "^4.16.2",
@@ -48,7 +50,8 @@
     "sequelize-cli": "^4.0.0",
     "tslint-microsoft-contrib": "^5.0.3",
     "typescript": "~2.5.3",
-    "zone.js": "^0.8.19"
+    "zone.js": "^0.8.19",
+    "snyk": "^1.69.10"
   },
   "devDependencies": {
     "codelyzer": "^4.0.1",
@@ -86,5 +89,6 @@
     "notification",
     "webhook",
     "slack"
-  ]
+  ],
+  "snyk": true
 }
