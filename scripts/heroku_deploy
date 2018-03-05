@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh
 APP_NAME=$1
 
 git remote add heroku git@heroku.com:$APP_NAME.git
@@ -8,38 +8,40 @@ echo "$MIGRATION_CHANGES db changes."
 
 PREV_WORKERS=$(heroku ps --app $APP_NAME | grep "^worker." | wc -l | tr -d ' ')
 
-DEPLOY_START=`date +%s
+DEPLOY_START=`date +%s`
 # migrations require downtime so enter maintenance mode
 if test $MIGRATION_CHANGES -gt 0; then
+  echo "Entering maintenance mode."
   heroku maintenance:on --app $APP_NAME
 
   # Make sure workers are not running during a migration
   heroku scale worker=0 --app $APP_NAME
 fi
 
+echo "Push changes to heroku."
 # deploy code changes (and implicitly restart the app and any running workers)
-set +e
 git push heroku $CIRCLE_SHA1:refs/heads/master
-set -e
 
 # run database migrations if needed and restart background workers once finished
 if test $MIGRATION_CHANGES -gt 0; then
+  echo "Running migration."
   heroku run sequelize db:migrate --env=production --app $APP_NAME
   heroku run sequelize db:seed --env=production --app $APP_NAME
   heroku scale worker=$PREV_WORKERS --app $APP_NAME
+  echo "Restart app."
   heroku restart --app $APP_NAME
 fi
 
+echo "Disable maintenance mode."
 heroku maintenance:off --app $APP_NAME
 
 DEPLOY_END=`date +%s`
 ELAPSED=$(( $DEPLOY_END - $DEPLOY_START ))
 
-echo "Deploy completed!"
 if test $MIGRATION_CHANGES -gt 0; then
   echo "  $ELAPSED seconds in maintenance mode."
 else
   echo "  $ELAPSED seconds, without maintenance mode."
 fi
 
-exit 0
+echo "Deploy completed!"
