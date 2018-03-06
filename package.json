@@ -18,8 +18,7 @@
     "migrate": "exec $(npm prefix)/scripts/db_migrate",
     "seed": "exec $(npm prefix)/scripts/db_seed",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect",
-    "heroku-postinstall": "npm run build"
+    "prepublish": "npm run snyk-protect"
   },
   "private": true,
   "dependencies": {
