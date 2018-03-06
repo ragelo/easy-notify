@@ -18,7 +18,8 @@
     "migrate": "exec $(npm prefix)/scripts/db_migrate",
     "seed": "exec $(npm prefix)/scripts/db_seed",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "prepublish": "yarn run snyk-protect",
+    "postinstall": "yarn run build"
   },
   "private": true,
   "dependencies": {
