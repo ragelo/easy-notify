@@ -17,6 +17,9 @@
     }
   },
   "root": "dist/",
+  "routes": {
+    "/**": "index.html"
+  },
   "proxies": {
     "/server/": {
       "origin": "${API_URL}"
