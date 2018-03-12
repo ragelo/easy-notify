@@ -21,7 +21,7 @@ jobs:
           paths:
             - ~/easy-notify
 
-  build_client:
+  build:
     working_directory: ~/easy-notify
     docker:
       - image: circleci/node:9.3
@@ -29,10 +29,10 @@ jobs:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
-          name: Build server
-          command: yarn run build-client
+          name: Build client
+          command: yarn run build
 
-  lint_client:
+  lint:
     working_directory: ~/easy-notify
     docker:
       - image: circleci/node:9.3
@@ -41,9 +41,9 @@ jobs:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Lint client
-          command: yarn run lint-client
+          command: yarn run lint
 
-  test_client:
+  test:
     working_directory: ~/easy-notify
     docker:
       - image: circleci/node:9.3-browsers
@@ -52,9 +52,9 @@ jobs:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Test client
-          command: yarn run test-client --code-coverage
+          command: yarn run test --code-coverage
 
-  test_client_e2e:
+  test_e2e:
     working_directory: ~/easy-notify
     docker:
       - image: circleci/node:9.3-browsers
@@ -64,41 +64,6 @@ jobs:
       - run:
           name: Test client (E2E)
           command: yarn run e2e
-
-  build_server:
-    working_directory: ~/easy-notify
-    docker:
-      - image: circleci/node:9.3
-    steps:
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          name: Build server
-          command: yarn run build-server
-
-  lint_server:
-    working_directory: ~/easy-notify
-    docker:
-      - image: circleci/node:9.3
-    steps:
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          name: Lint server
-          command: yarn run lint-server
-
-  test_server:
-    working_directory: ~/easy-notify
-    docker:
-      - image: circleci/node:9.3
-      - image: redis:2.8.7
-      - image: postgres:10.2
-    steps:
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          name: Test server
-          command: yarn run test-server
 
   deploy:
     working_directory: ~/easy-notify
@@ -122,33 +87,23 @@ workflows:
   build_and_test:
     jobs:
       - install_dependencies
-      - build_client:
+      - build:
           requires:
             - install_dependencies
-      - build_server:
+      - lint:
           requires:
             - install_dependencies
-      - lint_client:
+      - test:
           requires:
             - install_dependencies
-      - lint_server:
-          requires:
-            - install_dependencies
-      - test_client:
-          requires:
-            - install_dependencies
-      - test_client_e2e:
-          requires:
-            - install_dependencies
-      - test_server:
+      - test_e2e:
           requires:
             - install_dependencies
       - deploy:
           requires:
-            - build_client
-            - build_server
-            - test_server
-            - test_client
+            - build
+            - test
+            - test_e2e
           filters:
             branches:
               only: master

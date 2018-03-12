@@ -1,7 +1,0 @@
-{
-  "extends": ["tslint:recommended"],
-  "rules": {
-    "quotemark": ["single"],
-    "no-console": false
-  }
-}

@@ -1,2 +1,0 @@
-DROP TABLE IF EXISTS auth_client CASCADE;
-DROP SEQUENCE IF EXISTS auth_client_id_seq CASCADE;

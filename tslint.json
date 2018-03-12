@@ -1,8 +1,10 @@
 {
-  "extends": ["tslint:recommended"],
+  "extends": ["tslint:recommended", "tslint-angular"],
   "rules": {
     "quotemark": ["single"],
     "no-console": false,
-    "interface-name": false
+    "no-empty": true,
+    "interface-name": false,
+    "trailing-comma": true
   }
 }
