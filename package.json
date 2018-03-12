@@ -4,7 +4,7 @@
   "license": "apache-2.0",
   "scripts": {
     "start": "ng serve",
-    "watch": "ng serve",
+    "watch": "ng serve  --proxy-config proxy.conf.json",
     "build": "ng build --prod",
     "test": "ng test --watch=false",
     "lint": "tslint --config tslint.json --project . src/**/*.ts e2e/**/*.ts",
