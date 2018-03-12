@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
   templateUrl: './app.component.html',
 })
-export class AppComponent {
-  public title = 'EasyNotify';
-}
+export class AppComponent {}
