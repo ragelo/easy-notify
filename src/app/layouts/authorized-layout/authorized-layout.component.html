@@ -1,21 +1,44 @@
 <div class="main-container">
   <header class="header-3">
+
     <div class="branding">
-      <a class="nav-link">
-        <clr-icon shape="home" size="24"></clr-icon>
-        <span class="title">Easy Notify</span>
+      <a class="nav-link" routerLink="/dashboard">
+        <span class="title">EasyNotify</span>
       </a>
     </div>
-    <div class="header-nav">
-      <a routerLink="/dashboard" routerLinkActive="active" class="nav-link nav-text">Dashboard</a>
+
+    <div class="header-actions" *ngIf="authService.isAuthorized();">
+      <clr-dropdown>
+        <button class="nav-text" clrDropdownTrigger>
+          {{ (user$ | async)?.email }}
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <a clrDropdownItem routerLink="/profile">
+            <clr-icon shape="user"></clr-icon>
+            Profile
+          </a>
+          <a clrDropdownItem (click)="authService.logOut();">
+            <clr-icon shape="logout"></clr-icon>
+            Log out
+          </a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
     </div>
-    <div class="header-nav">
-      <a routerLink="/profile" routerLinkActive="active" class="nav-link nav-text">Profile</a>
-    </div>
+
   </header>
   <div class="content-container">
+
+    <clr-vertical-nav [clrVerticalNavCollapsible]="true">
+      <a clrVerticalNavLink routerLink="/dashboard" routerLinkActive="active">
+        Dashboard
+        <clr-icon clrVerticalNavIcon shape="view-cards"></clr-icon>
+      </a>
+    </clr-vertical-nav>
+
     <div class="content-area">
       <router-outlet></router-outlet>
     </div>
+
   </div>
 </div>

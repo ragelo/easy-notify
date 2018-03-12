@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-signin',
-  templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.scss']
+  template: '<p></p>',
 })
-export class SigninComponent {}
+export class SigninComponent {
+
+  constructor(private authService: AuthService) {
+    this.authService.signInStart();
+  }
+}

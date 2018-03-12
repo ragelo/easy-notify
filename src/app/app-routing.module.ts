@@ -7,6 +7,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {IsAuthorizedGuard} from './session/guards/is-authorized.guard';
 import {IsUnauthorizedGuard} from './session/guards/is-unauthorized.guard';
 import {NotFoundComponent} from './session/pages/not-found/not-found.component';
+import {SigninCallbackComponent} from './session/pages/signin-callback/signin-callback.component';
 import {SigninComponent} from './session/pages/signin/signin.component';
 import {SignupComponent} from './session/pages/signup/signup.component';
 
@@ -40,7 +41,15 @@ const AppRoutes: Routes = [{
     canActivate: [IsUnauthorizedGuard],
     component: SignupComponent,
   }, {
+    path: 'signin/callback',
+    canActivate: [IsUnauthorizedGuard],
+    component: SigninCallbackComponent,
+  }, {
     path: 'signin',
+    canActivate: [IsUnauthorizedGuard],
+    component: SigninComponent,
+  }, {
+    path: 'auth',
     canActivate: [IsUnauthorizedGuard],
     component: SigninComponent,
   }],

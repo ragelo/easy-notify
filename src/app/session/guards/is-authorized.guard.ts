@@ -13,7 +13,7 @@ export class IsAuthorizedGuard implements CanActivate {
     if (this.auth.isAuthorized()) {
       return true;
     }
-    this.router.navigate(['/signin']);
+    this.router.navigate(['/auth']);
 
     return false;
   }

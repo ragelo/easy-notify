@@ -1,3 +1,4 @@
+import {HttpClientModule} from '@angular/common/http';
 import { inject, TestBed } from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ClrIconModule} from '@clr/angular';
@@ -8,7 +9,7 @@ import { IsUnauthorizedGuard } from './is-unauthorized.guard';
 describe('IsUnauthorizedGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ClrIconModule, RouterTestingModule],
+      imports: [ClrIconModule, HttpClientModule, RouterTestingModule],
       providers: [IsUnauthorizedGuard, AuthService],
     });
   });
