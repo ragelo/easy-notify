@@ -1,0 +1,192 @@
+input ChangeProjectTitleInput {
+  projectId: ID!
+  title: String!
+  clientMutationId: String
+}
+
+type ChangeProjectTitlePayload {
+  project: Project!
+  clientMutationId: String
+}
+
+input ChangeWebhookTitleInput {
+  webhookId: ID!
+  title: String!
+  clientMutationId: String
+}
+
+type ChangeWebhookTitlePayload {
+  webhook: Webhook!
+  clientMutationId: String
+}
+
+input CreateProjectInput {
+  subjectId: ID!
+  title: String!
+  clientMutationId: String
+}
+
+type CreateProjectPayload {
+  project: Project!
+  clientMutationId: String
+}
+
+input CreateWebhookInput {
+  projectId: ID!
+  title: String
+  clientMutationId: String
+}
+
+type CreateWebhookPayload {
+  webhook: Webhook!
+  clientMutationId: String
+}
+
+type Mutation {
+  changeProjectTitle(input: ChangeProjectTitleInput!): ChangeProjectTitlePayload
+  changeWebhookTitle(input: ChangeWebhookTitleInput!): ChangeWebhookTitlePayload
+  createProject(input: CreateProjectInput!): CreateProjectPayload
+  createWebhook(input: CreateWebhookInput!): CreateWebhookPayload
+  removeProject(input: RemoveProjectInput!): RemoveProjectPayload
+  removeWebhook(input: RemoveWebhookInput!): RemoveWebhookPayload
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Project implements Node {
+  """The ID of an object"""
+  id: ID!
+  subject: Subject!
+  title: String!
+  webhooks(after: String, first: Int, before: String, last: Int): WebhookConnection
+}
+
+"""A connection to a list of items."""
+type ProjectConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ProjectEdge]
+}
+
+"""An edge in a connection."""
+type ProjectEdge {
+  """The item at the end of the edge"""
+  node: Project
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type Query {
+  viewer: Viewer
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+input RemoveProjectInput {
+  projectId: ID!
+  clientMutationId: String
+}
+
+type RemoveProjectPayload {
+  subject: Subject!
+  clientMutationId: String
+}
+
+input RemoveWebhookInput {
+  webhookId: ID!
+  clientMutationId: String
+}
+
+type RemoveWebhookPayload {
+  project: Project!
+  clientMutationId: String
+}
+
+type Subject implements Node {
+  email: String!
+  firstName: String
+
+  """The ID of an object"""
+  id: ID!
+  isVerified: Boolean
+  lastName: String
+  pictureUrl: String
+  roles: [String]!
+  projects(after: String, first: Int, before: String, last: Int): ProjectConnection
+}
+
+"""A connection to a list of items."""
+type SubjectConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [SubjectEdge]
+}
+
+"""An edge in a connection."""
+type SubjectEdge {
+  """The item at the end of the edge"""
+  node: Subject
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type Viewer {
+  user: Subject!
+  subjects(after: String, first: Int, before: String, last: Int): SubjectConnection
+  projects(after: String, first: Int, before: String, last: Int, ids: [ID!], subjectId: ID): ProjectConnection
+  webhooks(after: String, first: Int, before: String, last: Int, ids: [ID!], projectId: ID): WebhookConnection
+}
+
+type Webhook implements Node {
+  """The ID of an object"""
+  id: ID!
+  project: Project!
+  title: String!
+}
+
+"""A connection to a list of items."""
+type WebhookConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [WebhookEdge]
+}
+
+"""An edge in a connection."""
+type WebhookEdge {
+  """The item at the end of the edge"""
+  node: Webhook
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}

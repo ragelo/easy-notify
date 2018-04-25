@@ -1,70 +1,114 @@
 {
   "name": "easy-notify",
-  "version": "0.0.0",
-  "license": "apache-2.0",
-  "scripts": {
-    "start": "ng serve",
-    "watch": "ng serve  --proxy-config proxy.conf.json",
-    "build": "ng build --prod",
-    "test": "ng test --watch=false",
-    "lint": "tslint --config tslint.json --project . src/**/*.ts e2e/**/*.ts",
-    "e2e": "ng e2e",
-    "snyk-protect": "snyk protect",
-    "prepublish": "yarn run snyk-protect",
-    "postinstall": "yarn run build"
-  },
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@angular/animations": "^5.2.0",
-    "@angular/cli": "~1.7.2",
-    "@angular/common": "^5.2.0",
-    "@angular/compiler": "^5.2.0",
-    "@angular/compiler-cli": "^5.2.0",
-    "@angular/core": "^5.2.0",
-    "@angular/forms": "^5.2.0",
-    "@angular/http": "^5.2.0",
-    "@angular/language-service": "^5.2.0",
-    "@angular/platform-browser": "^5.2.0",
-    "@angular/platform-browser-dynamic": "^5.2.0",
-    "@angular/router": "^5.2.0",
-    "@angular/service-worker": "^5.2.7",
-    "@clr/angular": "^0.11.8",
-    "@clr/icons": "^0.11.8",
-    "@clr/ui": "^0.11.8",
-    "@types/jasmine": "~2.8.3",
-    "@types/jasminewd2": "~2.0.2",
-    "@types/node": "^9.4.6",
-    "@webcomponents/custom-elements": "^1.0.8",
-    "core-js": "^2.4.1",
-    "rxjs": "^5.5.6",
-    "snyk": "1.69.10",
-    "tslint-microsoft-contrib": "^5.0.3",
-    "typescript": "~2.5.3",
-    "zone.js": "^0.8.19"
+    "autoprefixer": "7.1.6",
+    "babel-core": "6.26.0",
+    "babel-eslint": "7.2.3",
+    "babel-jest": "20.0.3",
+    "babel-loader": "7.1.2",
+    "babel-preset-react-app": "^3.1.1",
+    "babel-runtime": "6.26.0",
+    "case-sensitive-paths-webpack-plugin": "2.1.1",
+    "chalk": "1.1.3",
+    "css-loader": "0.28.7",
+    "dotenv": "4.0.0",
+    "dotenv-expand": "4.2.0",
+    "eslint": "4.10.0",
+    "eslint-config-react-app": "^2.1.0",
+    "eslint-loader": "1.9.0",
+    "eslint-plugin-flowtype": "2.39.1",
+    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-jsx-a11y": "5.1.1",
+    "eslint-plugin-react": "7.4.0",
+    "extract-text-webpack-plugin": "3.0.2",
+    "file-loader": "1.1.5",
+    "fs-extra": "3.0.1",
+    "html-webpack-plugin": "2.29.0",
+    "jest": "20.0.4",
+    "object-assign": "4.1.1",
+    "postcss-flexbugs-fixes": "3.2.0",
+    "postcss-loader": "2.0.8",
+    "promise": "8.0.1",
+    "raf": "3.4.0",
+    "react": "^16.3.2",
+    "react-dev-utils": "^5.0.1",
+    "react-dom": "^16.3.2",
+    "react-relay": "^1.5.0",
+    "relay-compiler": "^1.5.0",
+    "relay-runtime": "^1.5.0",
+    "resolve": "1.6.0",
+    "style-loader": "0.19.0",
+    "sw-precache-webpack-plugin": "0.11.4",
+    "url-loader": "0.6.2",
+    "webpack": "3.8.1",
+    "webpack-dev-server": "2.9.4",
+    "webpack-manifest-plugin": "1.3.2",
+    "whatwg-fetch": "2.0.3"
+  },
+  "scripts": {
+    "start": "node scripts/start.js",
+    "build": "node scripts/build.js",
+    "test": "node scripts/test.js --env=jsdom",
+    "relay": "relay-compiler --src ./src --schema data/schema.graphql",
+    "relay:watch": "yarn run relay -- --watch"
   },
   "devDependencies": {
-    "codelyzer": "^4.0.1",
-    "concurrently": "^3.5.1",
-    "jasmine-core": "~2.8.0",
-    "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~2.0.0",
-    "karma-chrome-launcher": "~2.2.0",
-    "karma-coverage-istanbul-reporter": "^1.2.1",
-    "karma-jasmine": "~1.1.0",
-    "karma-jasmine-html-reporter": "^0.2.2",
-    "protractor": "~5.1.2",
-    "ts-node": "~4.1.0",
-    "tslint": "~5.9.1",
-    "tslint-angular": "^1.1.1"
+    "babel-plugin-relay": "^1.5.0",
+    "babel-plugin-syntax-class-properties": "^6.13.0",
+    "babel-plugin-syntax-flow": "6.18.0",
+    "babel-plugin-transform-async-to-module-method": "6.8.0",
+    "babel-plugin-transform-class-properties": "6.11.5",
+    "babel-plugin-transform-es2015-modules-amd": "6.24.1",
+    "babel-plugin-transform-flow-comments": "6.8.0",
+    "babel-plugin-transform-react-jsx": "6.8.0",
+    "babel-plugin-transform-runtime": "6.15.0",
+    "babel-preset-es2015": "6.24.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-latest": "6.24.1",
+    "babel-preset-react": "6.24.1",
+    "eslint-config-airbnb": "14.1.0",
+    "eslint-plugin-graphql": "0.2.4",
+    "eslint-plugin-no-use-extend-native": "0.3.12",
+    "eslint-plugin-prefer-object-spread": "1.2.1",
+    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-unicorn": "2.1.1",
+    "flow-bin": "^0.70.0",
+    "react-compiler": "^1.0.3"
   },
-  "engines": {
-    "node": "9.3.0",
-    "yarn": "1.3.2"
-  },
-  "keywords": [
-    "notification",
-    "webhook",
-    "slack"
-  ],
-  "snyk": true
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,mjs}"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
+      "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
+    ],
+    "testEnvironment": "node",
+    "testURL": "http://localhost",
+    "transform": {
+      "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
+    ],
+    "moduleNameMapper": {
+      "^react-native$": "react-native-web"
+    },
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "json",
+      "web.jsx",
+      "jsx",
+      "node",
+      "mjs"
+    ]
+  }
 }

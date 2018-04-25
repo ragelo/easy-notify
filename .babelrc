@@ -1,0 +1,27 @@
+{
+  "passPerPreset": true,
+  "presets": [
+    "es2015",
+    "latest",
+    "stage-0",
+    "react"
+  ],
+  "ignore": [
+    "**/.eslintrc*",
+  ],
+  "plugins": [
+    "relay",
+    "syntax-flow",
+    "syntax-class-properties",
+    ["transform-async-to-module-method", {
+      "module": "bluebird",
+      "method": "coroutine"
+    }],
+    "transform-react-jsx",
+    "transform-flow-comments",
+    ["transform-runtime", {
+      "regenerator": true
+    }],
+    "transform-es2015-modules-commonjs"
+  ]
+}
